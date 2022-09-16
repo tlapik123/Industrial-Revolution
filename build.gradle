@@ -80,7 +80,7 @@ repositories {
     }
     maven {
         name = "Cafeteria Development"
-        url = 'https://maven.cafeteria.dev'
+        url = 'https://maven.cafeteria.dev/releases'
         content {
             includeGroup 'dev.cafeteria'
             includeGroup 'me.luligabi'
