@@ -113,8 +113,7 @@ object IndustrialRevolutionClient : ClientModInitializer {
             ELECTROLYTIC_SEPARATOR_HANDLER,
             STEAM_TURBINE_HANDLER,
             SOLAR_POWER_PLANT_TOWER_HANDLER,
-            DATA_CARD_WRITER_HANDLER,
-            PUMP_HANDLER
+            DATA_CARD_WRITER_HANDLER
         ).forEach { handler ->
             ScreenRegistry.register(handler) { controller, inv, _ -> IRInventoryScreen(controller, inv.player) }
         }

@@ -24,11 +24,7 @@ import net.minecraft.util.math.Direction
 class DrainBlockEntity(tier: Tier, pos: BlockPos, state: BlockState) : MachineBlockEntity<BasicMachineConfig>(tier, MachineRegistry.DRAIN_REGISTRY, pos, state) {
 
     init {
-        this.fluidComponent = object : FluidComponent({ this }, bucket) {
-            init {
-                this.outputTanks = intArrayOf(0)
-            }
-        }
+        this.fluidComponent = FluidComponent({ this }, bucket)
     }
 
     override val maxInput: Long = config.maxInput
@@ -36,10 +32,10 @@ class DrainBlockEntity(tier: Tier, pos: BlockPos, state: BlockState) : MachineBl
     override fun machineTick() {
         val world = world ?: return
         val fluidComponent = fluidComponent ?: return
-        if (ticks % 20 == 0 || !fluidComponent[0].isEmpty) return
+        if (world.time % 20 != 0L || !fluidComponent[0].isEmpty) return
 
         val fluidState = world.getFluidState(pos.up())
-        if (fluidState?.isEmpty == false) {
+        if (fluidState?.isEmpty == false && canUse(config.energyCost)) {
             val range = getWorkingArea()
             // DOWN is intentionally excluded
             val directions = arrayOf(Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)
@@ -65,6 +61,7 @@ class DrainBlockEntity(tier: Tier, pos: BlockPos, state: BlockState) : MachineBl
                     val drained = block.drainFluid(world, pos, blockState)
                     if (drained != Fluids.EMPTY) {
                         fluidComponent[0].insert(FluidVariant.of(drained), bucket, true)
+                        use(config.energyCost)
                         return
                     }
                 }

@@ -80,7 +80,7 @@ repositories {
     }
     maven {
         name = "Cafeteria Development"
-        url = 'https://maven.cafeteria.dev/releases'
+        url = 'https://maven.cafeteria.dev'
         content {
             includeGroup 'dev.cafeteria'
             includeGroup 'me.luligabi'
@@ -131,9 +131,7 @@ dependencies {
     dependencies.ext.lib("com.github.Draylar:magna:${project.magna_version}")
     dependencies.ext.lib("com.github.emilyploszaj:step-height-entity-attribute:v1.0.1")
     dependencies.ext.lib("dev.cafeteria:fake-player-api:${project.fakeplayerapi_version}")
-    include "dev.cafeteria:fake-player-api:${project.fakeplayerapi_version}"
-    dependencies.ext.lib("me.luligabi:NoIndium:${project.noindium_version}")
-    include "me.luligabi:NoIndium:${project.noindium_version}"
+    dependencies.ext.lib("me.luligabi:NoIndium:1.0")
     dependencies.ext.lib("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}", true)
 
     modRuntimeOnly("com.terraformersmc:modmenu:${project.modmenu_version}") {
@@ -197,18 +195,18 @@ publishing {
     }
 
     // select the repositories you want to publish to
-//    repositories {
-//        maven {
-//            url "https://maven.cafeteria.dev/releases"
-//            credentials {
-//                username = project.property("mcdUsername")
-//                password = project.property("mcdPassword")
-//            }
-//            authentication {
-//                basic(BasicAuthentication)
-//            }
-//        }
-//    }
+    repositories {
+        maven {
+            url "https://maven.cafeteria.dev/releases"
+            credentials {
+                username = project.property("mcdUsername")
+                password = project.property("mcdPassword")
+            }
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
 }
 
 compileKotlin.kotlinOptions.jvmTarget = "16"
