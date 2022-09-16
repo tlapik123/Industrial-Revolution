@@ -55,7 +55,8 @@ class DrillBlockEntity(pos: BlockPos, state: BlockState) : LootableContainerBloc
             miningProgress = 0.0
             val item = data.pickRandom(world!!.random)
             val rng = if (data.rng == 1 && world!!.random.nextDouble() < 0.1) 2 else 1
-            val count = ((5 * data.richness) + world!!.random.nextInt((OreDataCards.MAX_PER_CYCLE * data.richness).toInt().coerceAtLeast(1))).toInt() * rng
+            val rngBound = (OreDataCards.MAX_PER_CYCLE * data.richness).toInt().coerceAtLeast(1)
+            val count = ((5 * data.richness) + world!!.random.nextInt(rngBound)).toInt() * rng
             var stack = ItemStack(item, count)
 
             if (data.rng == 1 && world!!.random.nextDouble() > 0.9) {
