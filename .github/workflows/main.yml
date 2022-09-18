@@ -1,4 +1,4 @@
-name: 'Build master'
+name: 'Build 1.18.2 branch'
 
 on: workflow_dispatch
 
