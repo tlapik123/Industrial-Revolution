@@ -60,15 +60,15 @@ class MiningRigBlockEntity(tier: Tier, pos: BlockPos, state: BlockState)
     override fun machineTick() {
         val inventory = inventoryComponent?.inventory ?: return
 
-        if (remainingStacks.isNotEmpty()) {
-            val copy = ArrayList(remainingStacks)
-            remainingStacks.clear()
-            copy.forEach { output(it) }
+//         if (remainingStacks.isNotEmpty()) {
+//             val copy = ArrayList(remainingStacks)
+//             remainingStacks.clear()
+//             copy.forEach { output(it) }
 
-            getActiveDrills().forEach { drill -> drill.setWorkingState(false) }
-            workingState = false
-            return
-        }
+//             getActiveDrills().forEach { drill -> drill.setWorkingState(false) }
+//             workingState = false
+//             return
+//         }
 
         val cardStack = inventory.getStack(0)
         val data = OreDataCards.readNbt(cardStack)
