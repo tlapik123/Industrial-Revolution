@@ -1,6 +1,8 @@
 name: 'Build master'
 
-on: workflow_dispatch
+on: 
+  workflow_run:
+    branches: [ 1.18.2 ]
 
 jobs:
   build:
